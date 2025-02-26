@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+*
+    margin: 0
+    scroll-behavior: smooth
+    box-sizing: border-box
+    font-family: 'DM Sans', sans-serif
+    transition: all 75ms ease-out
+
+.button
+    background: #2E3EDF
+    padding: 12px 24px
+    border-radius: 40px
+    display: flex
+    gap: 4px
+    &:hover
+        cursor: pointer
+        scale: 1.05
+        box-shadow: 0px 0px 15px #2E3EDF
+
+/* dm-sans-regular - latin */
+@font-face 
+  font-display: swap
+  font-family: 'DM Sans'
+  font-style: normal
+  font-weight: 400
+  src: url('../public/assets/fonts/dm-sans-v15-latin-regular.woff2') format('woff2')

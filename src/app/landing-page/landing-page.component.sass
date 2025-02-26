@@ -1,0 +1,57 @@
+main
+    background: linear-gradient(180deg, #000000 -19.89%, rgba(0, 0, 0, 0.55) 40.46%, #000000 100%), url('../../../public/assets/img/landingpage_bg.jpeg')
+    background-position: center
+    background-size: cover
+    min-height: 100svh
+    max-height: 100svh
+    width: 100%
+    color: white
+    display: flex
+    flex-direction: column
+
+header
+    justify-content: space-between
+    display: flex
+    align-items: center
+    height: 108px
+    padding: 0px 96px
+
+    @media screen and ( max-width: 768px )
+        padding: 0px 16px
+
+section
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+    gap: 32px
+    height: 100%
+    flex: 1
+
+    h1
+        font-size: 48px
+        font-weight: 700
+
+    p
+        font-size: 18px
+        font-weight: 400
+        text-align: center
+
+    form
+        display: flex
+        gap: 16px
+
+        input
+            height: 48px
+            width: 360px
+            padding: 0px 24px
+            background: none
+            border: 1px solid white
+            border-radius: 40px
+            outline: none
+            font-size: 18px
+            font-weight: 400
+            color: white
+            &::placeholder
+                color: white
+        
