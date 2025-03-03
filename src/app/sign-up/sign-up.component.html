@@ -62,15 +62,16 @@
                 </defs>
             </svg>
         </div>
-        <div class="button">Log in</div>
+        <div routerLink="/login" class="button">Log in</div>
     </header>
     <section>
         <div class="content-card">
             <h1>Sign up</h1>
             <form>
-                <input type="email" placeholder="Email Address">
+                <input id="emailInput" type="email" placeholder="Email Address">
                 <div class="input-container">
                     <input
+                        id="passwordInput"
                         [type]="isPasswordVisible ? 'text' : 'password'"
                         placeholder="Enter a password"
                     >
@@ -82,6 +83,7 @@
                 </div>
                 <div class="input-container">
                     <input
+                        id="repeatedPasswordInput"
                         [type]="isRepeatedPasswordVisible ? 'text' : 'password'"
                         placeholder="Confirm password"
                     >
