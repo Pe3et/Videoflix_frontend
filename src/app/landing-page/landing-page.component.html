@@ -69,7 +69,14 @@
         <h2 class="mobile">Watch whenever you want wherever you want</h2>
         <p>Enter your email to create or restart your subscription.</p>
         <form>
-            <input type="email" placeholder="Email Address" />
+            <input
+                id="mailInput"
+                type="email"
+                placeholder="Email Address"
+                (blur)="saveMailToSessionStorage()"
+                [(ngModel)] = "emailAddress"
+                name="mailInput"
+            />
             <div class="button" routerLink="/sign-up">
                 <p>Sign Up</p>
                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">

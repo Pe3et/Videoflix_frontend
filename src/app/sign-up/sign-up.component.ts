@@ -11,6 +11,7 @@ import { FooterComponent } from '../footer/footer.component';
 export class SignUpComponent {
   isPasswordVisible = false;
   isRepeatedPasswordVisible = false;
+  sessionStorageMail = sessionStorage.getItem('email')
 
   togglePasswordVisibility(field: 'password' | 'repeatedPassword') {
     if (field === 'password') {
