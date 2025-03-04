@@ -47,10 +47,11 @@
                 <div class="input-container">
                     <input
                         id="emailInput"
+                        #emailInput
                         type="email"
                         placeholder="Email Address"
                         [value]="sessionStorageMail"
-                        (blur)="validateEmail($event)"
+                        (blur)="validateEmail(emailInput.value)"
                     >
                     <div [ngClass]="{'error-message': true, 'hidden': isEmailValid}">
                         <img src="/assets/img/warning.svg" alt="error warning">
@@ -63,7 +64,7 @@
                         #passwordInput
                         [type]="isPasswordVisible ? 'text' : 'password'"
                         placeholder="Enter a password"
-                        (blur)="checkEmptyPassword($event)"
+                        (blur)="checkEmptyPassword(passwordInput.value)"
                     >
                     <img
                         [src]="getVisibilityIcon('password')"
@@ -78,9 +79,10 @@
                 <div class="input-container">
                     <input
                         id="repeatedPasswordInput"
+                        #repeatedPasswordInput
                         [type]="isRepeatedPasswordVisible ? 'text' : 'password'"
                         placeholder="Confirm password"
-                        (blur)="validateRepeatedPassword($event, passwordInput.value)"
+                        (blur)="validateRepeatedPassword(repeatedPasswordInput.value, passwordInput.value)"
                     >
                     <img
                         [src]="getVisibilityIcon('repeatedPassword')"
@@ -93,7 +95,16 @@
                     </div>   
                 </div>
             </form>
-            <div class="button">Get Started</div>
+            <div
+                class="button"
+                (click)="signUp(
+                    emailInput.value,
+                    passwordInput.value,
+                    repeatedPasswordInput.value
+                )"
+            >
+                Get Started
+            </div>
         </div>
     </section>
     <app-footer></app-footer>

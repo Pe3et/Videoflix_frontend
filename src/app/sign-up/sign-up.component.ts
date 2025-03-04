@@ -17,6 +17,7 @@ export class SignUpComponent {
   isPasswordEmpty = false
   arePasswordsMatching = true
 
+  
   togglePasswordVisibility(field: 'password' | 'repeatedPassword') {
     if (field === 'password') {
       this.isPasswordVisible = !this.isPasswordVisible;
@@ -37,19 +38,33 @@ export class SignUpComponent {
     }
   }
 
-  validateEmail(event: FocusEvent) {
-    const email = (event.target as HTMLInputElement)?.value || '';
+  validateEmail(email: string) {
     const emailPattern = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
     this.isEmailValid = emailPattern.test(email)
   }
 
-  checkEmptyPassword(event: FocusEvent) {
-    const password = (event.target as HTMLInputElement)?.value || '';
+  checkEmptyPassword(password: string) {
     this.isPasswordEmpty = password.length === 0
   }
 
-  validateRepeatedPassword(event: FocusEvent, firstEnteredPassword: string) {
-    const repeatedPassword = (event.target as HTMLInputElement)?.value || '';
+  validateRepeatedPassword(repeatedPassword: string, firstEnteredPassword: string) {
     this.arePasswordsMatching = repeatedPassword === firstEnteredPassword
+  }
+
+  signUp(email: string, password: string, repeatedPassword: string){
+    if(this.areAllInputFieldsValid(email, password, repeatedPassword)) {
+      const postData = {
+        email: email,
+        password: password
+      }
+      //TODO: Post to API
+    }
+  }
+
+  areAllInputFieldsValid(email: string, password: string, repeatedPassword: string) {
+    this.validateEmail(email);
+    this.checkEmptyPassword(password);
+    this.validateRepeatedPassword(repeatedPassword, password);
+    return this.isEmailValid && !this.isPasswordEmpty && this.arePasswordsMatching;
   }
 }
