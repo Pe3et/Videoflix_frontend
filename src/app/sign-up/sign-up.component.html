@@ -60,6 +60,7 @@
                 <div class="input-container">
                     <input
                         id="passwordInput"
+                        #passwordInput
                         [type]="isPasswordVisible ? 'text' : 'password'"
                         placeholder="Enter a password"
                         (blur)="checkEmptyPassword($event)"
@@ -79,12 +80,17 @@
                         id="repeatedPasswordInput"
                         [type]="isRepeatedPasswordVisible ? 'text' : 'password'"
                         placeholder="Confirm password"
+                        (blur)="validateRepeatedPassword($event, passwordInput.value)"
                     >
                     <img
                         [src]="getVisibilityIcon('repeatedPassword')"
                         alt="toggle repeated password visibility"
                         (click)="togglePasswordVisibility('repeatedPassword')"
-                    >   
+                    >
+                    <div [ngClass]="{'error-message': true, 'hidden': arePasswordsMatching}">
+                        <img src="/assets/img/warning.svg" alt="error warning">
+                        <span>Passwords must match.</span>
+                    </div>   
                 </div>
             </form>
             <div class="button">Get Started</div>
