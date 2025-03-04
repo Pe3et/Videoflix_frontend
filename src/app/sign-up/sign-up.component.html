@@ -44,12 +44,19 @@
         <div class="content-card">
             <h1>Sign up</h1>
             <form>
-                <input
-                    id="emailInput"
-                    type="email"
-                    placeholder="Email Address"
-                    value="{{sessionStorageMail}}"
-                >
+                <div class="input-container">
+                    <input
+                        id="emailInput"
+                        type="email"
+                        placeholder="Email Address"
+                        [value]="sessionStorageMail"
+                        (blur)="validateEmail($event)"
+                    >
+                    <div [ngClass]="{'error-message': true, 'hidden': isEmailValid}">
+                        <img src="/assets/img/warning.svg" alt="error warning">
+                        <span>Please enter a correct email address.</span>
+                    </div>
+                </div>
                 <div class="input-container">
                     <input
                         id="passwordInput"
