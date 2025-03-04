@@ -54,7 +54,7 @@
                     >
                     <div [ngClass]="{'error-message': true, 'hidden': isEmailValid}">
                         <img src="/assets/img/warning.svg" alt="error warning">
-                        <span>Please enter a correct email address.</span>
+                        <span>Please enter a valid email address.</span>
                     </div>
                 </div>
                 <div class="input-container">
@@ -62,12 +62,17 @@
                         id="passwordInput"
                         [type]="isPasswordVisible ? 'text' : 'password'"
                         placeholder="Enter a password"
+                        (blur)="checkEmptyPassword($event)"
                     >
                     <img
                         [src]="getVisibilityIcon('password')"
                         alt="toggle password visibility"
                         (click)="togglePasswordVisibility('password')"
                     >
+                    <div [ngClass]="{'error-message': true, 'hidden': !isPasswordEmpty}">
+                        <img src="/assets/img/warning.svg" alt="error warning">
+                        <span>Please enter a password.</span>
+                    </div>
                 </div>
                 <div class="input-container">
                     <input

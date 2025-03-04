@@ -14,6 +14,7 @@ export class SignUpComponent {
   isRepeatedPasswordVisible = false;
   sessionStorageMail = sessionStorage.getItem('email')
   isEmailValid = true
+  isPasswordEmpty = false
 
   togglePasswordVisibility(field: 'password' | 'repeatedPassword') {
     if (field === 'password') {
@@ -39,5 +40,10 @@ export class SignUpComponent {
     const email = (event.target as HTMLInputElement)?.value || '';
     const emailPattern = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
     this.isEmailValid = emailPattern.test(email)
+  }
+
+  checkEmptyPassword(event: FocusEvent) {
+    const password = (event.target as HTMLInputElement)?.value || '';
+    this.isPasswordEmpty = password.length === 0
   }
 }
