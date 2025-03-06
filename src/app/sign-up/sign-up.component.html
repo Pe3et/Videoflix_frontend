@@ -51,7 +51,7 @@
                         type="email"
                         placeholder="Email Address"
                         [value]="sessionStorageMail"
-                        (blur)="validateEmail(emailInput.value)"
+                        (input)="validateEmail(emailInput.value)"
                     >
                     <div [ngClass]="{'error-message': true, 'hidden': isEmailValid}">
                         <img src="/assets/img/warning.svg" alt="error warning">
@@ -64,7 +64,7 @@
                         #passwordInput
                         [type]="isPasswordVisible ? 'text' : 'password'"
                         placeholder="Enter a password"
-                        (blur)="checkEmptyPassword(passwordInput.value)"
+                        (input)="checkEmptyPassword(passwordInput.value)"
                     >
                     <img
                         [src]="getVisibilityIcon('password')"
@@ -82,7 +82,7 @@
                         #repeatedPasswordInput
                         [type]="isRepeatedPasswordVisible ? 'text' : 'password'"
                         placeholder="Confirm password"
-                        (blur)="validateRepeatedPassword(repeatedPasswordInput.value, passwordInput.value)"
+                        (input)="validateRepeatedPassword(repeatedPasswordInput.value, passwordInput.value)"
                     >
                     <img
                         [src]="getVisibilityIcon('repeatedPassword')"
@@ -97,6 +97,12 @@
             </form>
             <div
                 class="button"
+                [ngClass]="{
+                    'disabled':
+                        !emailInput.value
+                        || !passwordInput.value
+                        || !repeatedPasswordInput.value
+                    }"
                 (click)="signUp(
                     emailInput.value,
                     passwordInput.value,
