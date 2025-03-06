@@ -1,0 +1,41 @@
+.toast
+    position: absolute
+    height: 80px
+    min-width: 20%
+    max-width: 40%
+    color: white
+    display: flex
+    align-items: center
+    font-size: 16px
+    bottom: 32px
+    left: 32px
+    animation: slideInFromBottom 0.5s ease-in-out
+
+    .toast-red-part
+        background: #FF002E
+        height: 100%
+        width: 5%
+        border-radius: 20px 0px 0px 20px
+
+    .toast-blue-part
+        padding: 24px 32px 24px 16px
+        height: 100%
+        display: flex
+        align-items: center
+        flex: 1
+        border-radius: 0px 20px 20px 0px
+        gap: 16px
+        background: #2E3EDF
+        p
+            flex: 2
+        .spacer
+            width: 1px
+            border-radius: 1px
+            background: white
+            height: 32px
+
+@keyframes slideInFromBottom 
+  0% 
+    transform: translateY(250%)
+  100% 
+    transform: translateY(0%)
