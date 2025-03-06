@@ -14,6 +14,10 @@ export class AppComponent {
 
   toastMessage: string | null = null;
 
+  /**
+   * Connection to the toast-message service, so toast messages can be
+   * called from every other child component.
+   */
   constructor(private toastService: ToastMessagesService) {
     this.toastService.toastMessage$.subscribe((message) => {
       this.toastMessage = message;

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { ToastMessagesService } from '../services/toast-messages.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,6 +17,7 @@ export class SignUpComponent {
   isEmailValid = true
   isPasswordEmpty = false
   arePasswordsMatching = true
+  toastService = inject(ToastMessagesService)
 
   /**Toggles the visibility of a password input.*/
   togglePasswordVisibility(field: 'password' | 'repeatedPassword') {
@@ -26,7 +28,7 @@ export class SignUpComponent {
     }
   }
 
-  /**Get's the correct svg depending on the visibiliyt of the password.*/
+  /**Get's the correct svg depending on the visibility of the password.*/
   getVisibilityIcon(field: 'password' | 'repeatedPassword') {
     if (field === 'password') {
       return this.isPasswordVisible
