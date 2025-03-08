@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { ToastMessagesService } from '../services/toast-messages.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,6 +19,8 @@ export class SignUpComponent {
   isPasswordEmpty = false
   arePasswordsMatching = true
   toastService = inject(ToastMessagesService)
+  apiService = inject(ApiService)
+  router = inject(Router)
 
   /**Toggles the visibility of a password input.*/
   togglePasswordVisibility(field: 'password' | 'repeatedPassword') {
@@ -58,13 +61,18 @@ export class SignUpComponent {
   }
 
   /**Registers the new user when everything is validated*/
-  signUp(email: string, password: string, repeatedPassword: string){
+  async signUp(email: string, password: string, repeatedPassword: string){
     if(this.areAllInputFieldsValid(email, password, repeatedPassword)) {
       const postData = {
         email: email,
         password: password
       }
-      //TODO: Post to API
+      let post = await this.apiService.post(postData, 'auth/register/')
+      if(post.detail) {
+        this.toastService.showToast(post.detail)
+      } else {
+        this.router.navigate(['login'])
+      }
     }
   }
 
