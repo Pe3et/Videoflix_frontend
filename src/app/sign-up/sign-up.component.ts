@@ -71,6 +71,8 @@ export class SignUpComponent {
       if(post.detail) {
         this.toastService.showToast(post.detail)
       } else {
+        this.toastService.showToast('Activation link sent to your email.')
+        sessionStorage.setItem('email', post.email)
         this.router.navigate(['login'])
       }
     }
