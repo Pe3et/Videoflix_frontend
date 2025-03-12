@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FooterComponent } from "../footer/footer.component";
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ApiService } from '../services/api.service';
+import { ToastMessagesService } from '../services/toast-messages.service';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +16,20 @@ export class LoginComponent {
   isPasswordEmpty = false;
   isEmailValid = true;
   sessionStorageMail = sessionStorage.getItem('email');
+  apiService = inject(ApiService);
+  messageService = inject(ToastMessagesService);
+  router = inject(Router);
 
   /**Handles the login request.*/
-  login(email: string, password: string) {
-    //TODO: login
+  async login(email: string, password: string) {
+    let username = email.split('@')[0];
+    let result = await this.apiService.post({'username': username, 'password': password}, 'auth/login/');
+    if(result.token) {
+      sessionStorage.setItem('token', result.token);
+      this.router.navigate(['video-offer']);
+    } else {
+      this.messageService.showToast(result.details)
+    }
   }
 
   /**Toggles the visibility of a password input.*/
