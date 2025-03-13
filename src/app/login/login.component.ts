@@ -27,8 +27,10 @@ export class LoginComponent {
     if(result.token) {
       sessionStorage.setItem('token', result.token);
       this.router.navigate(['video-offer']);
-    } else {
+    } else if(result.details){
       this.messageService.showToast(result.details)
+    } else {
+      this.messageService.showToast(result.detail);
     }
   }
 
