@@ -6,6 +6,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { VideoOfferComponent } from './video-offer/video-offer.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent},
@@ -14,5 +15,6 @@ export const routes: Routes = [
     { path: 'sign-up', component: SignUpComponent },
     { path: 'login', component: LoginComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'reset-password/:token', component: ResetPasswordComponent },
     { path: 'video-offer', component: VideoOfferComponent },
 ];
