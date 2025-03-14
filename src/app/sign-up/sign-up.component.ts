@@ -68,8 +68,8 @@ export class SignUpComponent {
         password: password
       }
       let post = await this.apiService.post(postData, 'auth/register/')
-      if(post.detail) {
-        this.toastService.showToast(post.detail)
+      if(post.details) {
+        this.toastService.showToast(post.details)
       } else {
         this.toastService.showToast('Activation link sent to your email.')
         sessionStorage.setItem('email', post.email)

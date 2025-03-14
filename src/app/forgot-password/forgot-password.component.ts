@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
 import { RouterLink } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,9 +13,12 @@ import { RouterLink } from '@angular/router';
 export class ForgotPasswordComponent {
   isEmailValid = true;
   sessionStorageMail = sessionStorage.getItem('email');
+  apiService = inject(ApiService);
 
-  resetPassword(email: string){
-    
+  /**Posts the entered email to the forgot-password endpoint,
+   * so the user get's an email from the backend.*/
+  sendResetPasswordEmail(email: string){
+    this.apiService.post({'email': email}, 'auth/forgot-password/')
   }
 
   /**Checks if the email is valid and handles the boolean for this validation.*/
