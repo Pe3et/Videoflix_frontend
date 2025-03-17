@@ -10,5 +10,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './video-offer.component.sass'
 })
 export class VideoOfferComponent {
-
+  
 }
