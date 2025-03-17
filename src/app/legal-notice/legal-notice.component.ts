@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-legal-notice',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './legal-notice.component.html',
   styleUrl: './legal-notice.component.sass'
 })
