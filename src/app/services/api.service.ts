@@ -10,12 +10,16 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  async post(postData: any, url: string): Promise<any> {
+  async post(postData: any, url: string, token?: string): Promise<any> {
+    const headers: { [key: string]: string } = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers['Authorization'] = `Token ${token}`;
+    }
     const response = await fetch(this.BASE_URL + url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify(postData),
     });
     return await response.json();
