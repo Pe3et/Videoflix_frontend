@@ -1,0 +1,61 @@
+main
+    background: black
+    background-position: center
+    background-size: cover
+    min-height: 100svh
+    max-height: 100svh
+    width: 100%
+    color: white
+    display: flex
+    flex-direction: column
+
+header
+    justify-content: space-between
+    display: flex
+    align-items: center
+    height: 108px
+    padding: 0px 96px
+
+    .logo
+        align-items: center
+        justify-content: center
+        img
+            height: 48px
+
+    @media screen and ( max-width: 768px )
+        padding: 0px 16px
+
+        .logo
+            img
+                height: 32px
+
+.desktop
+    display: flex
+
+.mobile
+    display: none
+   
+@media screen and ( max-width: 768px )
+    .desktop
+        display: none
+
+    .mobile
+        display: flex
+
+
+section
+    padding: 0px 96px
+
+    @media screen and ( max-width: 768px )
+        padding: 0px 16px
+
+.hero
+    height: 40svh
+
+.video-offer
+    height: 60svh
+
+.footer-component
+    position: absolute
+    bottom: 0
+    right: 96px
