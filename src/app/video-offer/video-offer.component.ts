@@ -11,6 +11,9 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class VideoOfferComponent implements OnInit {
   token: string | null = null;
+  videoTitle: string = 'White Cat'
+  videoDescription: string = 'What does this white cat see out of the window?'
+  videoThumbnailPath: string = 'assets/img/white_cat.png'
 
   constructor(private router: Router) { }
 
@@ -23,7 +26,7 @@ export class VideoOfferComponent implements OnInit {
     if (!this.token) {
       this.router.navigate(['/login']);
     } else {
-      //TODO: load videos/thumbails from DB
+      //TODO: load videos/thumbnails from DB
     }
   }
 }

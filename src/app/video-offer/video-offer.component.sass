@@ -1,5 +1,4 @@
 main
-    background: black
     background-position: center
     background-size: cover
     min-height: 100svh
@@ -15,6 +14,9 @@ header
     align-items: center
     height: 108px
     padding: 0px 96px
+    position: absolute
+    width: 100%
+    z-index: 1
 
     .logo
         align-items: center
@@ -54,10 +56,40 @@ section
         padding: 0px 16px
 
 .hero
-    height: 40svh
+    flex: 0
+    display: flex
+    flex-direction: column
+    justify-content: start
+    padding-top: 128px
+    padding-bottom: 96px
+    background: linear-gradient(180deg, rgba(20, 20, 20, 0.6) 0%, rgba(20, 20, 20, 0) 50%, #141414 100%)
+    top: 0
+    position: relative
+
+    img
+        position: absolute
+        width: 100%
+        height: 100%
+        object-fit: cover
+        top: 0
+        left: 0
+        z-index: -1
+
+    h1
+        font-size: 88px
+        margin-bottom: 48px
+
+    p
+        font-size: 16px
+        margin-bottom: 32px
+
+    .button
+        height: 48px
+        width: fit-content
 
 .video-offer
-    height: 60svh
+    flex: 1
+    background: black
 
 .footer-component
     position: absolute
