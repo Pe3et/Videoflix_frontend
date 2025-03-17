@@ -39,9 +39,22 @@ export class ResetPasswordComponent implements OnInit {
   /**
    * Handles the reset password request to the backend.
    */
-  resetPassword(password: string, repeatedPassword: string) {
-    this.areAllInputFieldsValid(password, repeatedPassword)
-    //TODO: post request mit Token im Header für die auth
+  async resetPassword(password: string, repeatedPassword: string) {
+    if(this.areAllInputFieldsValid(password, repeatedPassword) && this.token) {
+      const postData = {
+        'password': password,
+        'repeatedPassword': repeatedPassword
+      }
+      const url = 'auth/reset-password/'
+      const result = await this.apiService.post(postData, url, this.token)
+      if(result['details']) {
+        this.toastService.showToast(result['details'])
+        this.router.navigate(['login'])
+      } else {
+        this.toastService.showToast('Error resetting password.')
+        this.router.navigate(['forgot-password'])
+      }
+    }
   }
 
   /**Toggles the visibility of a password input.*/
