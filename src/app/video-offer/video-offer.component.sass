@@ -110,8 +110,13 @@ header
             display: flex
             gap: 16px
             overflow-x: auto
+            overflow-y: hidden
 
             .video-card
+                &:hover
+                    transform: scale(1.05)
+                    cursor: pointer
+
                 img
                     height: 120px
                     width: 213px

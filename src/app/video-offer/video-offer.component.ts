@@ -58,6 +58,7 @@ export class VideoOfferComponent implements OnInit {
     this.videoTitle = video.title;
     this.videoDescription = video.description;
     this.videoThumbnailPath = video.thumbnail;
+    window.scrollTo({ top: 0});
     //TODO: set play-button functionality
   }
 

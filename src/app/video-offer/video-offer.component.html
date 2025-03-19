@@ -36,7 +36,7 @@
             <h2>New on Videoflix</h2>
             <div class="video-thumbnails">
                 @for (video of videosJSON.slice().reverse(); track $index) {
-                    <div class="video-card">
+                    <div class="video-card" (click)="setHeroVideo(video)">
                         <img src="{{video.thumbnail}}" alt="video thumbnail">
                     </div>
                 }
@@ -47,7 +47,7 @@
                 <h2>{{category.charAt(0).toUpperCase() + category.slice(1)}}</h2>
                 <div class="video-thumbnails">
                     @for (video of getFilteredVideos(category); track $index) {
-                        <div class="video-card">
+                        <div class="video-card" (click)="setHeroVideo(video)">
                             <img src="{{video.thumbnail}}" alt="video thumbnail">
                         </div>
                     }
