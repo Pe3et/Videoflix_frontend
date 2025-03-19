@@ -5,6 +5,20 @@ import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { ToastMessagesService } from '../services/toast-messages.service';
 
+interface Video {
+  title: string;
+  description: string;
+  thumbnail: string;
+  id: number;
+  category: string;
+  original_file: string;
+  processed_120p: string;
+  processed_360p: string;
+  processed_720p: string;
+  processed_1080p: string;
+  created_at: string
+}
+
 @Component({
   selector: 'app-video-offer',
   imports: [FooterComponent, CommonModule, RouterLink],
@@ -13,14 +27,13 @@ import { ToastMessagesService } from '../services/toast-messages.service';
 })
 export class VideoOfferComponent implements OnInit {
   token: string | null = null;
-  videoTitle: string = 'White Cat';
-  videoDescription: string = 'What does this white cat see out of the window?';
-  videoThumbnailPath: string = 'assets/img/white_cat.png';
-
+  videoTitle: string | null = null;
+  videoDescription: string | null = null;
+  videoThumbnailPath: string | null = null;
 
   apiService = inject(ApiService);
   messageService = inject(ToastMessagesService);
-  videosJSON: any;
+  videosJSON: any[] = [];
 
   constructor(private router: Router) { }
 
@@ -33,7 +46,16 @@ export class VideoOfferComponent implements OnInit {
     if (!this.token) {
       this.router.navigate(['/login']);
     } else {
-      this.videosJSON = await this.apiService.get('videos/', this.token)
+      this.videosJSON = await this.apiService.get('videos/', this.token);
+      this.setHeroVideo(this.videosJSON[0])
     }
+  }
+
+  /** Sets the hero video based on the first video to the given video in parameter. */
+  setHeroVideo(video: Video){
+    this.videoTitle = video.title;
+    this.videoDescription = video.description;
+    this.videoThumbnailPath = video.thumbnail;
+    //TODO: set play-button functionality
   }
 }
