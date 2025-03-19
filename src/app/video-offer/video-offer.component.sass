@@ -2,11 +2,12 @@ main
     background-position: center
     background-size: cover
     min-height: 100svh
-    max-height: 100svh
     width: 100%
     color: white
     display: flex
     flex-direction: column
+    position: relative
+    overflow-x: hidden
 
 header
     justify-content: space-between
@@ -48,23 +49,18 @@ header
     .mobile
         display: flex
 
-
-section
-    padding: 0px 96px
-
-    @media screen and ( max-width: 768px )
-        padding: 0px 16px
-
 .hero
     flex: 0
     display: flex
     flex-direction: column
     justify-content: start
-    padding-top: 128px
-    padding-bottom: 96px
     background: linear-gradient(180deg, rgba(20, 20, 20, 0.6) 0%, rgba(20, 20, 20, 0) 50%, #141414 100%)
     top: 0
     position: relative
+    padding: 128px 96px 96px
+
+    @media screen and ( max-width: 768px )
+        padding: 128px 16px 96px
 
     img
         position: absolute
@@ -92,11 +88,19 @@ section
 .video-offer
     flex: 1
     background: black
+    display: flex
+    flex-direction: column
+    gap: 48px
+    width: 100%  
+    padding: 0px 0px 180px 96px 
+    @media screen and ( max-width: 768px )
+        padding: 0px 0px 180px 16px
 
     .video-row
         display: flex
         flex-direction: column
         gap: 16px
+        padding-right: 8px
 
         .h2
             font-size: 22px
@@ -105,12 +109,12 @@ section
         .video-thumbnails
             display: flex
             gap: 16px
+            overflow-x: auto
 
             .video-card
                 img
                     height: 120px
                     width: 213px
-
 
 .footer-component
     position: absolute
@@ -120,4 +124,3 @@ section
     @media screen and ( max-width: 768px )
         right: 50%
         transform: translateX(50%)
-        margin-bottom: -32px

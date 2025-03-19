@@ -34,6 +34,7 @@ export class VideoOfferComponent implements OnInit {
   apiService = inject(ApiService);
   messageService = inject(ToastMessagesService);
   videosJSON: any[] = [];
+  categories: string[] = []
 
   constructor(private router: Router) { }
 
@@ -47,7 +48,8 @@ export class VideoOfferComponent implements OnInit {
       this.router.navigate(['/login']);
     } else {
       this.videosJSON = await this.apiService.get('videos/', this.token);
-      this.setHeroVideo(this.videosJSON[0])
+      this.setHeroVideo(this.videosJSON[0]);
+      this.getCategoriesFromVideos()
     }
   }
 
@@ -57,5 +59,19 @@ export class VideoOfferComponent implements OnInit {
     this.videoDescription = video.description;
     this.videoThumbnailPath = video.thumbnail;
     //TODO: set play-button functionality
+  }
+
+  /** Gets all categories present in the videosJSON and puts them into teh categories array.
+   *  The purpose of this is to be able to create a row for every category.
+   */
+  getCategoriesFromVideos() {
+    const categoriesJSON = this.videosJSON.map(video => video.category);
+    const uniqueCategories = [...new Set(categoriesJSON)];
+    this.categories = uniqueCategories;
+  }
+
+  /** Filters the videosJSON for a category and returns the filtered array for the video row. */
+  getFilteredVideos(category: string) {
+    return this.videosJSON.filter(vid => vid.category === category);
   }
 }
