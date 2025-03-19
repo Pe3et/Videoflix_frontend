@@ -31,6 +31,17 @@
             Play
         </div>
     </section>
-    <section class="video-offer">placeholder</section>
+    <section class="video-offer">
+        <div class="video-row">
+            <h2>New on Videoflix</h2>
+            <div class="video-thumbnails">
+                @for (video of videosJSON.slice().reverse(); track $index) {
+                    <div class="video-card">
+                        <img src="{{video.thumbnail}}" alt="video thumbnail">
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
     <app-footer class="footer-component"></app-footer>
 </main>
