@@ -30,6 +30,7 @@ export class VideoOfferComponent implements OnInit {
   videoTitle: string | null = null;
   videoDescription: string | null = null;
   videoThumbnailPath: string | null = null;
+  videoID: number | null = null;
 
   apiService = inject(ApiService);
   messageService = inject(ToastMessagesService);
@@ -58,8 +59,8 @@ export class VideoOfferComponent implements OnInit {
     this.videoTitle = video.title;
     this.videoDescription = video.description;
     this.videoThumbnailPath = video.thumbnail;
+    this.videoID = video.id
     window.scrollTo({ top: 0});
-    //TODO: set play-button functionality
   }
 
   /** Gets all categories present in the videosJSON and puts them into teh categories array.
@@ -74,5 +75,10 @@ export class VideoOfferComponent implements OnInit {
   /** Filters the videosJSON for a category and returns the filtered array for the video row. */
   getFilteredVideos(category: string) {
     return this.videosJSON.filter(vid => vid.category === category);
+  }
+
+  /** Opens the video player with the videoID as URL-Parameter. */
+  openVideoPlayer() {
+    this.router.navigate(['/video-player/' + this.videoID]);
   }
 }

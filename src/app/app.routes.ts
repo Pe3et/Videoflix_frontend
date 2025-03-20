@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { VideoOfferComponent } from './video-offer/video-offer.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { VideoPlayerComponent } from './video-player/video-player.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent},
@@ -17,5 +18,6 @@ export const routes: Routes = [
     { path: 'forgot-password', component: ForgotPasswordComponent },
     { path: 'reset-password/:token', component: ResetPasswordComponent },
     { path: 'video-offer', component: VideoOfferComponent },
+    { path: 'video-player/:videoID', component: VideoPlayerComponent },
     { path: '**', redirectTo: ''}
 ];
