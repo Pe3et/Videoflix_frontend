@@ -91,9 +91,12 @@
               }
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "node_modules/video.js/dist/video-js.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/video.js/dist/video.min.js"
+            ]
           }
         }
       }

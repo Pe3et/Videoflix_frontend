@@ -1,0 +1,57 @@
+body, html
+    background: black
+
+main
+    position: relative
+
+.overlay
+    position: absolute
+    height: 100%
+    width: 100%
+    z-index: 1
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+    header
+        display: flex
+        justify-content: space-between
+        padding: 10px 32px
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%)
+        z-index: 1
+
+        .back-arrow, .logo
+            height: 48px
+            width: 48px
+
+        .back-arrow:hover
+                cursor: pointer
+
+    footer
+        display: flex
+        flex-direction: column
+        min-width: 100%
+        padding: 10px 32px
+
+        .navigation-buttons
+            display: flex
+            justify-content: space-between
+
+            .left-area, .right-area
+                display: flex
+                gap: 24px
+
+            .title
+                font-size: 24px
+                font-weight: 700
+                color: white
+
+.hide
+    display: none
+
+.vjs-icon-play, .vjs-icon-pause
+    color: white
+    font-size: 48px
+
+    &:hover
+        cursor: pointer
