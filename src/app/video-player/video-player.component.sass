@@ -18,13 +18,13 @@ main
         justify-content: space-between
         padding: 10px 32px
         background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%)
-        z-index: 1
 
         .back-arrow, .logo
             height: 48px
             width: 48px
 
-        .back-arrow:hover
+        .back-arrow
+            &:hover
                 cursor: pointer
 
     footer
@@ -32,6 +32,7 @@ main
         flex-direction: column
         min-width: 100%
         padding: 10px 32px
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%)
 
         .navigation-buttons
             display: flex
@@ -46,12 +47,12 @@ main
                 font-weight: 700
                 color: white
 
-.hide
-    display: none
-
-.vjs-icon-play, .vjs-icon-pause
-    color: white
-    font-size: 48px
+            .vjs-icon-play, .vjs-icon-pause
+                color: white
+                font-size: 48px
 
     &:hover
         cursor: pointer
+
+.hide
+    display: none

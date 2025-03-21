@@ -60,8 +60,8 @@ export class VideoPlayerComponent {
     this.videoJSON = await this.apiService.get('videos/' + this.videoId, this.token);
   }
 
-  /** Play button Logic */
-  changePlayState() {
+  /** Play button logic, but is on the whole overlay. */
+  togglePlayState() {
     if(this.player.paused()) {
       this.player.play();
     } else {
