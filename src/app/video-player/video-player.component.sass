@@ -1,11 +1,9 @@
 body, html
     background: black
 
-main
-    position: relative
-
 .overlay
     position: absolute
+    top: 0
     height: 100%
     width: 100%
     z-index: 1
@@ -47,9 +45,10 @@ main
                 font-weight: 700
                 color: white
 
-            .vjs-icon-play, .vjs-icon-pause
+            .vjs-icon-customization
                 color: white
                 font-size: 48px
+                z-index: 2
 
     &:hover
         cursor: pointer

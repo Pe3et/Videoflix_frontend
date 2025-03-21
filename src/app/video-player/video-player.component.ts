@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 
 export class VideoPlayerComponent {
-  @ViewChild('target', { static: true }) target!: ElementRef;
+  @ViewChild('videoJSPlayer', { static: true }) videoJSPlayer!: ElementRef;
   @ViewChild('progressBar', { static: true }) progressBar!: ElementRef;
   @ViewChild('innerProgress', { static: true }) innerProgress!: ElementRef;
   videoId: string | null = null;
@@ -38,14 +38,17 @@ export class VideoPlayerComponent {
     });
   }
 
-  /** Initializes the Player. */
+  /** Initializes the Player and appends the custom overlay as a child. */
   initializePlayer() {
-    this.player = videojs(this.target.nativeElement, {
+    this.player = videojs(this.videoJSPlayer.nativeElement, {
       sources: [{ src: this.videoJSON.original_file, type: 'video/mp4' }],
       controls: false,
       autoplay: true,
       fluid: true
     });
+    const overlay = document.getElementById('overlay');
+    const playerContainer = this.player.el();
+    playerContainer.appendChild(overlay)
   }
 
   /** Destroys the player. */
@@ -66,6 +69,15 @@ export class VideoPlayerComponent {
       this.player.play();
     } else {
       this.player.pause();
+    }
+  }
+
+  /** Fullscreen button logic. */
+  toggleFullscreen() {
+    if(this.player.isFullscreen()) {
+      this.player.exitFullscreen();
+    } else {
+      this.player.requestFullscreen();
     }
   }
 }
