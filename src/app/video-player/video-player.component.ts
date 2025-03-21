@@ -34,6 +34,5 @@ export class VideoPlayerComponent {
   /** Single GET from Database containing the video data (including links to different resolutions) */
   async getVideo(){
     const videoJSON = await this.apiService.get('videos/' + this.videoId, this.token);
-    console.log(videoJSON);
   }
 }
