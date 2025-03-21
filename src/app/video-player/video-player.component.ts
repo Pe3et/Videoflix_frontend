@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-video-player',
@@ -10,7 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class VideoPlayerComponent {
   videoId: string | null = null;
-  router = inject(Router)
+  router = inject(Router);
+  apiService = inject(ApiService);
+  token: string | null = sessionStorage.getItem('token');
 
   constructor(private route: ActivatedRoute) { }
 
@@ -28,7 +31,9 @@ export class VideoPlayerComponent {
     });
   }
 
-  getVideo(){
-    // TODO: implement the database request
+  /** Single GET from Database containing the video data (including links to different resolutions) */
+  async getVideo(){
+    const videoJSON = await this.apiService.get('videos/' + this.videoId, this.token);
+    console.log(videoJSON);
   }
 }

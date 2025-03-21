@@ -15,7 +15,7 @@ export class ApiService {
    * Takes the data to post, the specific endpoint url in addition to the base url
    * and optionally a token for authorization. 
    */
-  async post(postData: any, url: string, token?: string): Promise<any> {
+  async post(postData: any, url: string, token?: string | null): Promise<any> {
     const headers: { [key: string]: string } = {
       'Content-Type': 'application/json',
     };
@@ -33,7 +33,7 @@ export class ApiService {
   /**
    * Handles a get request to the backend with a URL specified as parameter.
    */
-  async get(url: string, token?: string): Promise<any> {
+  async get(url: string, token?: string | null): Promise<any> {
     const headers: { [key: string]: string } = {
       'Content-Type': 'application/json',
     };
