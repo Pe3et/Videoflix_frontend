@@ -1,4 +1,4 @@
-<div id="overlay" class="overlay" (click)="togglePlayState()">
+<div id="overlay" class="overlay" (click)="videoScreenClickHandler($event)">
     <header>
         <div class="back-arrow" routerLink="/video-offer">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,10 +28,12 @@
         </div>
     </header>
     <footer>
-        <app-progress-bar [currentValue]="50" [maxValue]="100"></app-progress-bar>
+        <div #seekBarContainer></div>
         <div class="navigation-buttons">
             <div class="left-area">
-                <div [ngClass]="{
+                <div
+                    (click)="togglePlayState()"
+                    [ngClass]="{
                     'vjs-icon-customization': true,
                     'vjs-icon-play': player?.paused(),
                     'vjs-icon-pause': !player?.paused()
@@ -91,7 +93,7 @@
                     'vjs-icon-fullscreen-enter': !player?.isFullscreen(),
                     'vjs-icon-fullscreen-exit': player?.isFullscreen()
                     }"
-                    (click)="$event.stopPropagation(); toggleFullscreen()"
+                    (click)="toggleFullscreen()"
                 >
                 </div>
             </div>

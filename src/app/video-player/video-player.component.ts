@@ -3,11 +3,10 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import videojs from 'video.js';
 import { CommonModule } from '@angular/common';
-import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @Component({
   selector: 'app-video-player',
-  imports: [RouterLink, CommonModule, ProgressBarComponent],
+  imports: [RouterLink, CommonModule],
   templateUrl: './video-player.component.html',
   styleUrls: ['./video-player.component.sass', '../../../node_modules/video.js/dist/video-js.css'],
   encapsulation: ViewEncapsulation.None
@@ -15,6 +14,7 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 export class VideoPlayerComponent {
   @ViewChild('videoJSPlayer', { static: true }) videoJSPlayer!: ElementRef;
+  @ViewChild('seekBarContainer', { static: true }) seekBarContainer!: ElementRef;
   @ViewChild('progressBar', { static: true }) progressBar!: ElementRef;
   @ViewChild('innerProgress', { static: true }) innerProgress!: ElementRef;
   videoId: string | null = null;
@@ -57,6 +57,9 @@ export class VideoPlayerComponent {
     const overlay = document.getElementById('overlay');
     const playerContainer = this.player.el();
     playerContainer.appendChild(overlay)
+    const seekBar = this.player.controlBar.progressControl.seekBar;
+    const seekBarElement = seekBar.el();
+    this.seekBarContainer.nativeElement.appendChild(seekBarElement);
   }
 
   /** Destroys the player. */
@@ -71,12 +74,19 @@ export class VideoPlayerComponent {
     this.videoJSON = await this.apiService.get('videos/' + this.videoId, this.token);
   }
 
-  /** Play button logic, but is on the whole overlay. */
+  /** Play button logic. */
   togglePlayState() {
     if(this.player.paused()) {
       this.player.play();
     } else {
       this.player.pause();
+    }
+  }
+
+  /** If a click on the vide screen isn't in the footer area, then the play-button-logic is called. */
+  videoScreenClickHandler(event: any) {
+    if(event.target.closest('footer') === null) {
+      this.togglePlayState()
     }
   }
 
