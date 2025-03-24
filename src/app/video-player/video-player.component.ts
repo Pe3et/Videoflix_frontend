@@ -25,17 +25,24 @@ export class VideoPlayerComponent {
 
   constructor(private route: ActivatedRoute) { }
 
-  /** Stores the videoId from URL-param in a variable and starts the database request. */
+  /** Stores the videoId from URL-param in a variable and starts the database request.
+   * If tehre's no token for the request, the user get's redirected to login.
+   */
   async ngOnInit(): Promise<void> {
-    this.route.paramMap.subscribe(async params => {
-      this.videoId = params.get('videoID');
-      if (!this.videoId) {
-        this.router.navigate(['video-offer'])
-      } else {
-        await this.getVideo();
-        this.initializePlayer()
-      }
-    });
+    if (!this.token) {
+      this.router.navigate(['/login']);
+    }
+    else {
+      this.route.paramMap.subscribe(async params => {
+        this.videoId = params.get('videoID');
+        if (!this.videoId) {
+          this.router.navigate(['video-offer'])
+        } else {
+          await this.getVideo();
+          this.initializePlayer()
+        }
+      });
+    }
   }
 
   /** Initializes the Player and appends the custom overlay as a child. */
