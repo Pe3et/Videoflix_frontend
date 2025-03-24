@@ -28,9 +28,7 @@
         </div>
     </header>
     <footer>
-        <div #progressBar class="progress-bar">
-            <div #innerProgress class="inner-progress"></div>
-        </div>
+        <app-progress-bar [currentValue]="50" [maxValue]="100"></app-progress-bar>
         <div class="navigation-buttons">
             <div class="left-area">
                 <div [ngClass]="{

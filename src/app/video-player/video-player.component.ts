@@ -3,10 +3,11 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import videojs from 'video.js';
 import { CommonModule } from '@angular/common';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @Component({
   selector: 'app-video-player',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, ProgressBarComponent],
   templateUrl: './video-player.component.html',
   styleUrls: ['./video-player.component.sass', '../../../node_modules/video.js/dist/video-js.css'],
   encapsulation: ViewEncapsulation.None
