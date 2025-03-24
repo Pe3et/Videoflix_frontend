@@ -15,8 +15,7 @@ import { CommonModule } from '@angular/common';
 export class VideoPlayerComponent {
   @ViewChild('videoJSPlayer', { static: true }) videoJSPlayer!: ElementRef;
   @ViewChild('seekBarContainer', { static: true }) seekBarContainer!: ElementRef;
-  @ViewChild('progressBar', { static: true }) progressBar!: ElementRef;
-  @ViewChild('innerProgress', { static: true }) innerProgress!: ElementRef;
+  @ViewChild('volumeElement', { static: true }) volumeElement!: ElementRef;
   videoId: string | null = null;
   router = inject(Router);
   apiService = inject(ApiService);
@@ -46,7 +45,7 @@ export class VideoPlayerComponent {
     }
   }
 
-  /** Initializes the Player and appends the custom overlay as a child. */
+  /** Initializes the Player and appends the custom overlay, built-in seekbar and audio-button as a child. */
   initializePlayer() {
     this.player = videojs(this.videoJSPlayer.nativeElement, {
       sources: [{ src: this.videoJSON.original_file, type: 'video/mp4' }],
@@ -60,6 +59,10 @@ export class VideoPlayerComponent {
     const seekBar = this.player.controlBar.progressControl.seekBar;
     const seekBarElement = seekBar.el();
     this.seekBarContainer.nativeElement.appendChild(seekBarElement);
+
+    const existingAudioButton = this.player.controlBar.getChild('VolumePanel');
+    this.player.controlBar.removeChild('VolumePanel');
+    this.volumeElement.nativeElement.appendChild(existingAudioButton.el());
   }
 
   /** Destroys the player. */
