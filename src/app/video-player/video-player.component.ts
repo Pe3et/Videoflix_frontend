@@ -3,10 +3,11 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import videojs from 'video.js';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-video-player',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './video-player.component.html',
   styleUrls: ['./video-player.component.sass', '../../../node_modules/video.js/dist/video-js.css'],
   encapsulation: ViewEncapsulation.None
@@ -22,6 +23,7 @@ export class VideoPlayerComponent {
   token: string | null = sessionStorage.getItem('token');
   player: any;
   videoJSON: any;
+  selectedResolution: string = "";
 
   constructor(private route: ActivatedRoute) { }
 
@@ -39,27 +41,42 @@ export class VideoPlayerComponent {
           this.router.navigate(['video-offer'])
         } else {
           await this.getVideo();
+          this.getDeviceResolution();
           this.initializePlayer()
         }
       });
     }
   }
 
-  /** Initializes the Player and appends the custom overlay, built-in seekbar and audio-button as a child. */
+  /** Initializes the Player and calls the fucntion to add the the overlay. */
   initializePlayer() {
     this.player = videojs(this.videoJSPlayer.nativeElement, {
-      sources: [{ src: this.videoJSON.original_file, type: 'video/mp4' }],
+      sources: [{ src: this.videoJSON['processed_' + this.selectedResolution], type: 'video/mp4' }],
       controls: false,
       autoplay: true,
       fluid: true
     });
+    this.addOverlay()
+  }
+
+  /** Adds the overlay with it's control bar to the player. */
+  addOverlay() {
     const overlay = document.getElementById('overlay');
     const playerContainer = this.player.el();
-    playerContainer.appendChild(overlay)
+    playerContainer.appendChild(overlay);
+    this.addSeekBar();
+    this.addAudioButton()
+  }
+
+  /** Adds the seekbar to the control bar. */
+  addSeekBar() {
     const seekBar = this.player.controlBar.progressControl.seekBar;
     const seekBarElement = seekBar.el();
     this.seekBarContainer.nativeElement.appendChild(seekBarElement);
+  }
 
+  /** Adds the audio button to the control bar. */
+  addAudioButton() {
     const existingAudioButton = this.player.controlBar.getChild('VolumePanel');
     this.player.controlBar.removeChild('VolumePanel');
     this.volumeElement.nativeElement.appendChild(existingAudioButton.el());
@@ -99,6 +116,28 @@ export class VideoPlayerComponent {
       this.player.exitFullscreen();
     } else {
       this.player.requestFullscreen();
+    }
+  }
+
+  /** Handles the manual change of resolution. */
+  changeResolution(event: any): void {
+    const resolution = event.target.value;
+    if (this.player) {
+      this.player.src({ src: this.videoJSON['processed_' + resolution], type: 'video/mp4' });
+    }
+  }
+
+  /** Automaticall get's the fitting video src depending on the device-resolution. */
+  getDeviceResolution() {
+    const deviceResolutionHeight = window.screen.height * (window.devicePixelRatio || 1);
+    if (deviceResolutionHeight >= 1080) {
+      this.selectedResolution = "1080p"
+    } else if (deviceResolutionHeight >= 720) {
+      this.selectedResolution = "720p"
+    } else if (deviceResolutionHeight >= 360) {
+      this.selectedResolution = "360p"
+    } else {
+      this.selectedResolution = "120p"
     }
   }
 }
