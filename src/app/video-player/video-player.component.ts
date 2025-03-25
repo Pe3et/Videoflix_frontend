@@ -4,6 +4,7 @@ import { ApiService } from '../services/api.service';
 import videojs from 'video.js';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastMessagesService } from '../services/toast-messages.service';
 
 @Component({
   selector: 'app-video-player',
@@ -20,6 +21,7 @@ export class VideoPlayerComponent {
   videoId: string | null = null;
   router = inject(Router);
   apiService = inject(ApiService);
+  toastService = inject(ToastMessagesService);
   token: string | null = sessionStorage.getItem('token');
   player: any;
   videoJSON: any;
@@ -124,6 +126,7 @@ export class VideoPlayerComponent {
     const resolution = event.target.value;
     if (this.player) {
       this.player.src({ src: this.videoJSON['processed_' + resolution], type: 'video/mp4' });
+      this.toastService.showToast('Resolution successfully changed to ' + resolution + '.')
     }
   }
 
