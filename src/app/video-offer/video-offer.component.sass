@@ -1,13 +1,15 @@
 main
     background-position: center
     background-size: cover
-    min-height: 100svh
     width: 100%
     color: white
     display: flex
     flex-direction: column
     position: relative
+    min-height: 100svh
+    max-height: 100svh
     overflow-x: hidden
+    overflow-y: scroll
 
 header
     justify-content: space-between
@@ -92,9 +94,9 @@ header
     flex-direction: column
     gap: 48px
     width: 100%  
-    padding: 0px 0px 180px 96px 
+    padding-left: 96px 
     @media screen and ( max-width: 768px )
-        padding: 0px 0px 180px 16px
+        padding-left: 16px
 
     .video-row
         display: flex
@@ -122,10 +124,11 @@ header
                     width: 213px
 
 .footer-component
-    position: absolute
-    bottom: 0
-    right: 96px
+    position: relative
+    display: flex
+    justify-content: end
+    padding-right: 96px
 
-    @media screen and ( max-width: 768px )
-        right: 50%
-        transform: translateX(50%)
+    @media screen and ( max-width: 480px )
+        justify-content: center
+        padding-right: 0
